@@ -52,6 +52,7 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const campaign = Campaign(id);
   const requestCount = await campaign.methods.getRequestCount().call();
+  const approversCount = await campaign.methods.approversCount().call();
 
   const requests = await Promise.all(
     Array(parseInt(requestCount))
@@ -70,12 +71,14 @@ export async function getServerSideProps(context) {
       complete: false,
       recipient: '',
       value: '',
+      contributorsCount: 0,
     };
     res.description = requests[i].description;
     res.approvalCount = requests[i].approvalCount;
     res.complete = requests[i].complete;
     res.recipient = requests[i].recipient;
     res.value = requests[i].value;
+    res.contributorsCount = approversCount;
     data.push(res);
   }
 
@@ -92,6 +95,7 @@ export interface Request {
   recipient: string;
   complete: boolean;
   approvalCount: number;
+  contributorsCount: number;
 }
 
 export default Requests;

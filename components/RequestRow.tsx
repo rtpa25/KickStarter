@@ -20,7 +20,7 @@ const RequestRow = ({
       <Cell>{request.description}</Cell>
       <Cell>{web3.utils.fromWei(request.value, 'ether')}</Cell>
       <Cell>{request.recipient}</Cell>
-      <Cell>{request.approvalCount}</Cell>
+      <Cell>{`${request.approvalCount}/${request.contributorsCount}`}</Cell>
     </Row>
   );
 };
