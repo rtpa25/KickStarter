@@ -3,12 +3,17 @@
 import { Button, Card } from 'semantic-ui-react';
 import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
+import Link from 'next/link';
 
 const Show = ({ campaigns }: { campaigns: string[] }) => {
   const items = campaigns.map((address: string) => {
     return {
       header: address,
-      description: <a>View Campaign</a>,
+      description: (
+        <Link href={`/campaigns/${address}`}>
+          <a>Go to campaign address</a>
+        </Link>
+      ),
       fluid: true,
     };
   });
@@ -17,12 +22,15 @@ const Show = ({ campaigns }: { campaigns: string[] }) => {
     <Layout>
       <div>
         <h3>Open Campaigns</h3>
-        <Button
-          content={'Create Campaign'}
-          icon={'add circle'}
-          primary={true}
-          floated={'right'}
-        />
+        <Link href={'/campaigns/new'}>
+          <Button
+            content={'Create Campaign'}
+            icon={'add circle'}
+            primary={true}
+            floated={'right'}
+          />
+        </Link>
+
         <Card.Group items={items} />
       </div>
     </Layout>
