@@ -44,6 +44,7 @@ const Requests = ({ data }: { data: Request[] }) => {
           })}
         </Body>
       </Table>
+      <div>Found {data.length} requests</div>
     </Layout>
   );
 };
